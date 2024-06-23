@@ -1,0 +1,1 @@
+xcopy ".\target\papercut_rhythm_backend-0.0.1-SNAPSHOT.jar" ".\war\" /y
