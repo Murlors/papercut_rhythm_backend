@@ -12,8 +12,7 @@ public class GlobalCorsConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         // 设置你要允许的网站域名
-        config.addAllowedOrigin("http://localhost:8888");
-        config.addAllowedOrigin("http://127.0.0.1:5173");
+        config.addAllowedOrigin("*");
         //允许跨域发送cookie
         config.setAllowCredentials(true);
         //放行全部原始头信息
