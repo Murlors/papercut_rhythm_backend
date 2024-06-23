@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.papercut_rhythm_backend.mapper.PaperworkMapper">
+
+    <select id="getPaperwork" resultType="java.util.Map">
+        SELECT *
+        FROM art
+        ORDER BY id DESC
+    </select>
+
+    <insert id="uploadPaperwork">
+        INSERT INTO art (title, author_id, create_time, content, img_url)
+        VALUES (#{title}, #{author_id}, NOW(), #{content}, #{img_url})
+    </insert>
+
+    <insert id="uploadPaperworkWithColor">
+        INSERT INTO art (title, author_id, create_time, content, img_url, background_color)
+        VALUES (#{title}, #{author_id}, NOW(), #{content}, #{img_url}, #{background_color})
+    </insert>
+
+    <insert id="uploadPaperworkWithImage">
+        INSERT INTO art (title, author_id, create_time, content, img_url, background_url)
+        VALUES (#{title}, #{author_id}, NOW(), #{content}, #{img_url}, #{background_url})
+    </insert>
+
+    <select id="getPaperworkByAuthorId" resultType="java.util.Map">
+        SELECT *
+        FROM art
+        WHERE author_id = #{id}
+        ORDER BY id DESC
+    </select>
+
+    <select id="getPaperworkById" resultType="java.util.Map">
+        SELECT *
+        FROM art
+        WHERE id = #{id}
+    </select>
+
+    <delete id="deletePaperworkById">
+        DELETE
+        FROM art
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

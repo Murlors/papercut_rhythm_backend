@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.papercut_rhythm_backend.mapper.FavorMapper">
+
+    <insert id="addFavor">
+        INSERT INTO favor (work_id, type, user_id)
+        VALUES (#{workId}, #{workType}, #{userId})
+    </insert>
+
+    <delete id="deleteFavor">
+        DELETE
+        FROM favor
+        WHERE work_id = #{workId}
+          AND user_id = #{userId}
+          AND type = #{workType}
+    </delete>
+
+    <select id="isFavor" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM favor
+        WHERE work_id = #{workId}
+          AND type = #{workType}
+          AND user_id = #{userId}
+    </select>
+
+</mapper>

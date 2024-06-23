@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.papercut_rhythm_backend.mapper.ThumbMapper">
+
+    <select id="getThumbsCountByTopicId" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM thumbs
+        WHERE type = #{type}
+          AND thumbs_topic_id = #{topicId}
+    </select>
+
+    <insert id="addThumbs">
+        INSERT INTO thumbs (thumbs_topic_id, thumbs_user_id, type)
+        VALUES (#{topicId}, #{userId}, #{type})
+    </insert>
+
+    <delete id="deleteThumbs">
+        DELETE
+        FROM thumbs
+        WHERE thumbs_topic_id = #{topicId}
+          AND thumbs_user_id = #{userId}
+          AND type = #{type}
+    </delete>
+
+    <select id="isThumbs" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM thumbs
+        WHERE type = #{type}
+          AND thumbs_topic_id = #{topicId}
+          AND thumbs_user_id = #{userId}
+    </select>
+
+</mapper>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.papercut_rhythm_backend.mapper.ForumMapper">
+
+    <select id="getTopicList" resultType="java.util.Map">
+        SELECT t.id,
+               t.title,
+               t.content,
+               t.status,
+               t.create_time,
+               u.id     as u_id,
+               u.username,
+               u.avatar,
+               u.`rank` as u_rank,
+               u.role_id,
+               u.introduction,
+               u.email
+        FROM topic t
+                 LEFT JOIN user u ON u.id = t.creator_id
+        ORDER BY t.create_time DESC
+    </select>
+
+    <select id="getTopicById" resultType="java.util.Map">
+        SELECT *
+        FROM topic
+        WHERE id = #{topicId}
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="getTopicByUserId" resultType="java.util.Map">
+        SELECT *
+        FROM topic
+        WHERE creator_id = #{keyUserId}
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="searchTopic" resultType="java.util.Map">
+        SELECT t.id,
+               t.title,
+               t.content,
+               t.status,
+               t.create_time,
+               u.id     as u_id,
+               u.username,
+               u.avatar,
+               u.`rank` as u_rank,
+               u.role_id,
+               u.introduction,
+               u.email
+        FROM topic t
+                 LEFT JOIN user u ON u.id = t.creator_id
+        WHERE t.title LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY t.create_time DESC
+    </select>
+
+    <select id="getTopicCommentById" resultType="com.example.papercut_rhythm_backend.bean.Comment">
+        SELECT *
+        FROM comment
+        WHERE comment_topic_id = #{topicId}
+          AND type = '1'
+        ORDER BY comment_time DESC
+    </select>
+
+    <insert id="addTopicComment">
+        INSERT INTO comment (comment_topic_id, comment_user_id, content, comment_time, type)
+        VALUES (#{topicId}, #{userId}, #{content}, NOW(), '1')
+    </insert>
+
+    <select id="getTopAuthorList" resultType="java.util.Map">
+        SELECT u.id,
+               u.username,
+               u.avatar,
+               u.`rank`,
+               u.role_id,
+               COUNT(t.id) as topic_count,
+               u.introduction
+        FROM user u
+                 LEFT JOIN topic t ON t.creator_id = u.id
+        GROUP BY u.id
+        ORDER BY COUNT(t.id) DESC
+        LIMIT 3
+    </select>
+
+    <insert id="addTopic">
+        INSERT INTO topic (title, content, creator_id, create_time, status)
+        VALUES (#{title}, #{content}, #{userId}, NOW(), '1')
+    </insert>
+
+    <select id="getTopicCount" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM topic
+    </select>
+
+    <delete id="deleteTopic">
+        DELETE
+        FROM topic
+        WHERE id = #{topicId}
+    </delete>
+
+    <select id="getAllCommentCount" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM comment
+        WHERE type = "1"
+    </select>
+
+    <select id="getAllVisitCount" resultType="java.lang.Integer">
+        SELECT SUM(visit_count)
+        FROM topic
+    </select>
+
+    <update id="addVisitCount">
+        UPDATE topic
+        SET visit_count = visit_count + 1
+        WHERE id = #{topicId}
+    </update>
+
+    <delete id="deleteTopicById">
+        DELETE
+        FROM topic
+        WHERE id = #{topicId}
+    </delete>
+
+</mapper>

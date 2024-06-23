@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.papercut_rhythm_backend.mapper.ArticleMapper">
+
+    <select id="getArticleById" resultType="java.util.Map">
+        SELECT *
+        FROM article
+        WHERE id = #{articleId}
+    </select>
+
+    <insert id="addArticle">
+        INSERT INTO article (title, content, creator_id, column_id, cover_img, create_time, status)
+        VALUES (#{title}, #{content}, #{creatorId}, #{columnId}, #{coverImg}, NOW(), '1')
+    </insert>
+
+    <update id="addVisitCount">
+        UPDATE article
+        SET visit_count = visit_count + 1
+        WHERE id = #{articleId}
+    </update>
+
+    <select id="getArticleByUserId" resultType="java.util.Map">
+        SELECT *
+        FROM article
+        WHERE creator_id = #{keyUserId}
+        ORDER BY create_time DESC
+    </select>
+
+    <delete id="deleteArticleById">
+        DELETE
+        FROM article
+        WHERE id = #{articleId}
+    </delete>
+
+</mapper>
