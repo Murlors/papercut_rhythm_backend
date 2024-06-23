@@ -28,8 +28,8 @@ public class SwaggerConfig {
     //配置swagger信息=apiinfo
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("纸间万象")
-                .description("纸间万象接口")
+                .title("纸韵剪影")
+                .description("纸韵剪影接口")
                 .version("1.0")
                 .build();
     }
