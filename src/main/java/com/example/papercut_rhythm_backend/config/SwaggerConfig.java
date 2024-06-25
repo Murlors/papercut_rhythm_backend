@@ -24,7 +24,6 @@ public class SwaggerConfig {
                 .build();
     }
 
-
     //配置swagger信息=apiinfo
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()

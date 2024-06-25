@@ -172,7 +172,6 @@ public class UserServiceImp implements UserService {
         map.put("rank", String.valueOf(u.getRank()));
         map.put("role_id", String.valueOf(u.getRoleId()));
         return R.success(map);
-
     }
 
     @Override

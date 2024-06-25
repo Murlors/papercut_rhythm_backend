@@ -104,5 +104,4 @@ public class ArticleController {
         return articleServiceImp.thumbUpArticle(articleId, userId);
     }
 
-
 }

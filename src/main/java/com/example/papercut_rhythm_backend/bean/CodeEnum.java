@@ -4,7 +4,6 @@ import lombok.Getter;
 
 @Getter
 public enum CodeEnum {
-    //状态码按顺序依次往下写
     SUCCESS(200, "成功"),
     ERROR(400, "失败"),
     SERVER_ERROR(-1, "服务端错误"),

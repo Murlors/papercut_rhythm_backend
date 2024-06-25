@@ -116,5 +116,4 @@ public class ColumnController {
         return columnServiceImp.deleteColumn(id);
     }
 
-
 }

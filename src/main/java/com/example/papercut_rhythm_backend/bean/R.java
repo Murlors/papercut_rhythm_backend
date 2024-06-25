@@ -35,7 +35,6 @@ public class R<T> {
     /**
      * 成功
      */
-    //成功的静态方法
     public static <T> R<T> success() {
         return new R<>(CodeEnum.SUCCESS.getCode(), CodeEnum.SUCCESS.getDesc());
     }
@@ -48,12 +47,10 @@ public class R<T> {
         return new R<>(CodeEnum.SUCCESS.getCode(), data);
     }
 
-    //自定义返回成功消息
     public static <T> R<T> success(String message) {
         return new R<>(CodeEnum.SUCCESS.getCode(), message);
     }
 
-    //自定义返回成功消息
     public static <T> R<T> success(CodeEnum codeEnum, String message) {
         return new R<>(codeEnum.getCode(), message);
     }
@@ -69,12 +66,10 @@ public class R<T> {
     /**
      * 失败
      */
-    //失败的静态方法
     public static <T> R<T> error() {
         return new R<>(CodeEnum.ERROR.getCode(), CodeEnum.ERROR.getDesc());
     }
 
-    //自定义返回失败消息
     public static <T> R<T> error(String message) {
         return new R<>(CodeEnum.ERROR.getCode(), message);
     }
@@ -83,7 +78,6 @@ public class R<T> {
         return new R<>(codeEnum.getCode(), codeEnum.getDesc());
     }
 
-    //自定义返回失败消息
     public static <T> R<T> error(CodeEnum codeEnum, String message) {
         return new R<>(codeEnum.getCode(), message);
     }

@@ -12,5 +12,4 @@ public interface CommentService {
 
     R<String> addComment(String topicId, String userId, String content, String type);
 
-
 }
